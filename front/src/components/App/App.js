@@ -10,7 +10,7 @@ const App = () => {
     return (
         <>
         <div className='wrapper'>
-            
+            <SignIn/>
         </div>
         </>
     )
