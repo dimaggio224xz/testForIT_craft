@@ -6,6 +6,20 @@ import chackLangth from '../../tools/chackLangth';
 
 const SignIn = () => {
 
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+
+    const putLogin = (e) => {
+        if (chackLangth(e)) {
+            setLogin(e.target.value)
+        }
+    }
+
+    const putPassword = (e) => {
+        if (chackLangth(e)) {
+            setPassword(e.target.value)
+        }
+    }
 
     return (
         <>
@@ -16,7 +30,10 @@ const SignIn = () => {
                 <div className="form-group">
                     <label>
                         <span>Логин</span>
-                        <input type="text" className="form-control"/>
+                        <input
+                            onChange={(e)=> putLogin(e)} value={login}
+                            type="text" className="form-control"
+                        />
                         <div className='warn-msg'>Такого логина несуществует!</div>
                     </label>
                 </div>
@@ -25,7 +42,10 @@ const SignIn = () => {
                 <div className="form-group">
                     <label>
                         <span>Пароль</span>
-                        <input type="password" className="form-control"/>
+                        <input
+                            onChange={(e)=> putPassword(e)} value={password}
+                            type="password" className="form-control"
+                        />
                         <div className='warn-msg'>Неправильный пароль!</div>
                     </label>
                 </div>

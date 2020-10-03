@@ -7,6 +7,36 @@ import chackLangth from '../../tools/chackLangth';
 
 const SignUp = () => {
 
+    const [name, setName] = useState('');
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [passwordTwo, setPasswordTwo] = useState('');
+
+    const putName = (e) => {
+        if (chackLangth(e)) {
+            setName(e.target.value)
+        }
+    }
+
+    const putLogin = (e) => {
+        if (chackLangth(e)) {
+            setLogin(e.target.value)
+        }
+    }
+
+    const putPassword = (e) => {
+        if (chackLangth(e)) {
+            setPassword(e.target.value)
+        }
+    }
+
+
+    const putPasswordTwo = (e) => {
+        if (chackLangth(e)) {
+            setPasswordTwo(e.target.value)
+        }
+    }
+
 
     return (
         <>
@@ -27,7 +57,10 @@ const SignUp = () => {
                 <div className="form-group">
                     <label>
                         <span>Имя</span>
-                        <input type="text" className="form-control"/>
+                        <input
+                            onChange={(e)=> putName(e)} value={name}
+                            type="text" className="form-control"
+                        />
                         <div className='warn-msg'>Некоректное имя!</div>
                     </label>
                 </div>
@@ -35,7 +68,10 @@ const SignUp = () => {
                 <div className="form-group">
                     <label>
                         <span>Логин</span>
-                        <input type="text" className="form-control"/>
+                        <input
+                            onChange={(e)=> putLogin(e)} value={login}
+                            type="text" className="form-control"
+                        />
                         <div className='warn-msg'>Некоректное имя!</div>
                     </label>
                 </div>
@@ -44,7 +80,10 @@ const SignUp = () => {
                 <div className="form-group">
                     <label>
                         <span>Пароль</span>
-                        <input type="password" className="form-control"/>
+                        <input
+                            onChange={(e)=> putPassword(e)} value={password}
+                            type="password" className="form-control"
+                        />
                         <div className='warn-msg'>Некоректный пароль!</div>
                     </label>
                 </div>
@@ -52,7 +91,10 @@ const SignUp = () => {
                 <div className="form-group">
                     <label>
                         <span>Подтверждение Пароля</span>
-                        <input type="password" className="form-control"/>
+                        <input
+                            onChange={(e)=> putPasswordTwo(e)} value={passwordTwo}
+                            type="password" className="form-control"
+                        />
                         <div className='warn-msg'>Пароли несовпадают!</div>
                     </label>
                 </div>
