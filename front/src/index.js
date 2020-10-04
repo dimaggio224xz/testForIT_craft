@@ -6,6 +6,9 @@ import App from './components/App';
 import { BrowserRouter as Router} from "react-router-dom";
 
 
+// I didn't use redux because technical task hadn't
+// this item, and program was small.
+
 
 ReactDOM.render(
 	<Router>

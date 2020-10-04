@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+
 
 import AllUsers from '../AllUsers';
 import SignIn from '../SignIn';
@@ -12,7 +13,8 @@ import SignUp from '../SignUp';
 
 const App = (p) => {
 
-    
+    const history = useHistory();
+
     return (
         <>
         <div className='wrapper'>

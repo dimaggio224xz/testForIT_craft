@@ -5,7 +5,7 @@ export default {
         else return await res.json();
     },
 
-    signIn: async (login, password) => {
+    makeSignIn: async (login, password) => {
         const res = await fetch("/create-note", {
             headers: {
             'Accept': 'application/json',
@@ -18,7 +18,7 @@ export default {
         else return await res.json();
     },
 
-    signUp: async (name, login, password) => {
+    makeSignUp: async (name, login, password) => {
         const res = await fetch("/create-note", {
             headers: {
             'Accept': 'application/json',

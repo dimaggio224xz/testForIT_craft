@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {Link} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import chackLangth from '../../tools/chackLangth';
 
 
 
+
 const SignUp = () => {
+
+    const history = useHistory();
 
     const [name, setName] = useState('');
     const [login, setLogin] = useState('');
