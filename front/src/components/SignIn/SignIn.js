@@ -4,22 +4,59 @@ import {Link} from "react-router-dom";
 import chackLangth from '../../tools/chackLangth';
 
 
+
 const SignIn = () => {
 
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
+    const [btnDisabled, setBtnDisabled] = useState(true);
+    const [btnDisabledEnter, setBtnDisabledEnter] = useState(false);
+
+    const [errLogin, setErrLogin] = useState(false);
+    const [errPassword, setErrPassword] = useState(false);
+
+
+
+
+
     const putLogin = (e) => {
-        if (chackLangth(e)) {
-            setLogin(e.target.value)
+        let str = e.target.value;
+        if (chackLangth(str)) {
+            setLogin(str);
+
+            if (errLogin) setErrLogin(false);
+            disabledFunc(str, password)
         }
     }
 
+
     const putPassword = (e) => {
-        if (chackLangth(e)) {
-            setPassword(e.target.value)
+        let str = e.target.value;
+        if (chackLangth(str)) {
+            setPassword(str);
+
+            if (errPassword) setErrPassword(false);
+            disabledFunc(str, login)
         }
     }
+
+
+    const disabledFunc = (a,b) => {
+        if (a && b) {
+            if (btnDisabled) setBtnDisabled(false);
+        } else {
+            if (!btnDisabled) setBtnDisabled(true);
+        }
+    }
+
+
+
+
+    const errLog = errLogin ? 'warn-msg' : 'd-none';
+    const errPass = errPassword ? 'warn-msg' : 'd-none';
+
+
 
     return (
         <>
@@ -34,7 +71,7 @@ const SignIn = () => {
                             onChange={(e)=> putLogin(e)} value={login}
                             type="text" className="form-control"
                         />
-                        <div className='warn-msg'>Такого логина несуществует!</div>
+                        <div className={errLog}>Такого логина несуществует!</div>
                     </label>
                 </div>
 
@@ -46,14 +83,14 @@ const SignIn = () => {
                             onChange={(e)=> putPassword(e)} value={password}
                             type="password" className="form-control"
                         />
-                        <div className='warn-msg'>Неправильный пароль!</div>
+                        <div className={errPass}>Неверный пароль!</div>
                     </label>
                 </div>
 
 
                 <div className='btn-wrap'>
 
-                    <button className="btn btn-primary mb-3">OK</button>
+                    <button disabled={btnDisabled || btnDisabledEnter} onClick={()=>enterUser()} className="btn btn-primary mb-3">OK</button>
 
                     <Link to='/signup' className='d-block'>
                         <button className="btn btn-outline-dark form-btn">Зарегистрироваться</button>

@@ -12,30 +12,84 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [passwordTwo, setPasswordTwo] = useState('');
 
+    const [btnDisabled, setBtnDisabled] = useState(true);
+    const [btnDisabledEnter, setBtnDisabledEnter] = useState(false);
+
+    const [errLogin, setErrLogin] = useState(false);
+    const [errPassword, setErrPassword] = useState(false);
+    const [errPasswordTwo, setErrPasswordTwo] = useState(false);
+
+
+
+
+
     const putName = (e) => {
-        if (chackLangth(e)) {
-            setName(e.target.value)
+        const str = e.target.value;
+        if (chackLangth(str)) {
+            setName(str);
+
+            disabledFunc(str, login, password, passwordTwo);
         }
     }
 
     const putLogin = (e) => {
-        if (chackLangth(e)) {
-            setLogin(e.target.value)
+        const str = e.target.value;
+        if (chackLangth(str)) {
+            setLogin(str);
+
+            disabledFunc(name, str, password, passwordTwo);
         }
     }
 
     const putPassword = (e) => {
-        if (chackLangth(e)) {
-            setPassword(e.target.value)
+        const str = e.target.value;
+        if (chackLangth(str)) {
+            setPassword(str);
+
+            if (errPasswordTwo) setErrPasswordTwo(false);
+            disabledFunc(name, login, str, passwordTwo);
         }
     }
 
 
     const putPasswordTwo = (e) => {
-        if (chackLangth(e)) {
-            setPasswordTwo(e.target.value)
+        const str = e.target.value;
+        if (chackLangth(str)) {
+            setPasswordTwo(str);
+
+            if (errPasswordTwo) setErrPasswordTwo(false);
+            disabledFunc(name, login, password, str);
         }
     }
+
+
+
+
+    const disabledFunc = (a,b,c,d) => {
+        if (a && b && c && d) {
+            if (btnDisabled) setBtnDisabled(false);
+        } else {
+            if (!btnDisabled) setBtnDisabled(true);
+        }
+    }
+
+
+
+    const registerUser = () => {
+        if (password !== passwordTwo) {
+            setErrPasswordTwo(true);
+        }
+        
+        else {
+            setBtnDisabledEnter(true);
+        }
+    }
+
+
+    const errLog = errLogin ? 'warn-msg' : 'd-none';
+    const errPass = errPassword ? 'warn-msg' : 'd-none';
+    const errPass2 = errPasswordTwo ? 'warn-msg' : 'd-none';
+
 
 
     return (
@@ -46,7 +100,7 @@ const SignUp = () => {
 
                 <div className='d-flex w-100 justify-content-between'>
                     <h2>Регистрация</h2>
-                    <Link to='/'>
+                    <Link to='/signin'>
                         <button type="button" className="close" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -61,7 +115,6 @@ const SignUp = () => {
                             onChange={(e)=> putName(e)} value={name}
                             type="text" className="form-control"
                         />
-                        <div className='warn-msg'>Некоректное имя!</div>
                     </label>
                 </div>
 
@@ -72,7 +125,7 @@ const SignUp = () => {
                             onChange={(e)=> putLogin(e)} value={login}
                             type="text" className="form-control"
                         />
-                        <div className='warn-msg'>Некоректное имя!</div>
+                        <div className={errLog}>Такой логин уже занят!</div>
                     </label>
                 </div>
 
@@ -84,7 +137,7 @@ const SignUp = () => {
                             onChange={(e)=> putPassword(e)} value={password}
                             type="password" className="form-control"
                         />
-                        <div className='warn-msg'>Некоректный пароль!</div>
+                        <div className={errPass}>Неверный пароль!</div>
                     </label>
                 </div>
 
@@ -95,12 +148,12 @@ const SignUp = () => {
                             onChange={(e)=> putPasswordTwo(e)} value={passwordTwo}
                             type="password" className="form-control"
                         />
-                        <div className='warn-msg'>Пароли несовпадают!</div>
+                        <div className={errPass2}>Пароли несовпадают!</div>
                     </label>
                 </div>
 
                 <div className='btn-wrap'>
-                    <button className="btn btn-success form-btn">OK</button>
+                    <button disabled={btnDisabled || btnDisabledEnter} onClick={()=>registerUser()} className="btn btn-success form-btn">OK</button>
                 </div>
 
             </div>
